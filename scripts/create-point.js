@@ -42,3 +42,49 @@ function getCities(event) {
 document
     .querySelector("select[name=uf]")
     .addEventListener("change", getCities)
+
+
+// Itens de coleta
+
+const itemsToCollect = document.querySelectorAll(".items-grid li")
+
+
+for (const item of itemsToCollect) {
+    item.addEventListener("click", handleSelectedItem)
+}
+
+const collectedItems = document.querySelector("input[name=items]")
+
+let selectedItems = []
+
+function handleSelectedItem(event){
+    
+    const itemLi = event.target
+
+    // add or remove classe 
+    itemLi.classList.toggle("selected")
+    
+    const itemId = itemLi.dataset.id
+
+    // verificar se existem item selecionados, se sim 
+    // pegar os item selecionados 
+    const alreadySelected = selectedItems.findIndex( function (item) {
+        const itemFound = item == itemId
+        return itemFound
+    })
+    // se estiver selecionado
+    if( alreadySelected >= 0 ) {
+        // tirar da seleção
+        const filteredItems = selectedItems.filter( item => {
+            const itemIsDifferent = item != itemId
+            return itemIsDifferent
+        })
+
+        selectedItems = filteredItems
+    } else {
+        // se mão estiver selecionado, adicionar a seleção
+        selectedItems.push(itemId)
+    }
+    
+    collectedItems.value = selectedItems
+}
