@@ -1,4 +1,4 @@
-# ecoleta
+# Ecoleta
 
 ### Aplicação para cadastro e consulta de pontos de coleta de reciclados.
 
